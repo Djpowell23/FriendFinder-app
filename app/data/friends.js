@@ -15,6 +15,26 @@
 //         1
 //       ]
 //   }
+var friendsArray = [
+    {
+        'name': 'Devin Powell',
+        'photo:': 'https://www.facebook.com',
+        'scores':[
+            '5',
+            '3',
+            '2',
+            '1',
+            '2',
+            '1',
+            '5',
+            '2',
+            '4',
+            '4'
+        ]
+    }
+];
+
+module.exports = friendsArray;
 
 
 // Determine the user's most compatible friend using the following as a guide:

@@ -1,6 +1,5 @@
 // Dependencies
 var express = require('express');
-var path = require('path');
 
 // Tells node that we are creating an "express" server
 var app = express();
@@ -12,12 +11,14 @@ var PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Routing
-app.get("/", function(req, res) {
-    res.json(path.join(__dirname, "public/index.html"));
-  });
+// ================================================================================
+// ROUTER
+// The below points our server to a series of "route" files.
+// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
+// ================================================================================
 
-
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
 // Start the Server
 app.listen(PORT, function () {
