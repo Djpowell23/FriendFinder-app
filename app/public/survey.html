@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body onload = 'clearForms()'>;
     <div class='container'>
         <h2><strong>Survey</strong></h2>
         <hr>
@@ -177,17 +177,34 @@
 </html>
 
 <script type='text/javascript'>
+    // Clear forms on page load
+    function clearForms() {
+        $('#friendName').val('');
+        $('#photoURL').val('');
+        $('#q1').val(''),
+        $('#q2').val(''),
+        $('#q3').val(''),
+        $('#q4').val(''),
+        $('#q5').val(''),
+        $('#q6').val(''),
+        $('#q7').val(''),
+        $('#q8').val(''),
+        $('#q9').val(''),
+        $('#q10').val('')
+    };
+
     $('#submit').on('click', function(event) {
         // Prevent Page Refresh
         event.preventDefault();
 
         // Make Sure Name and Photo Fields are filled
-        if ($('#friendName').val() === '' || $('#photoURL').val() === '') {             // Change to modal from alert later
-            // alert('Name and Photo fields required.');
+        if ($('#friendName').val() === '' || $('#photoURL').val() === '' || !$('#q1').val() || !$('#q2').val()
+        || !$('#q3').val() || !$('#q4').val() || !$('#q5').val() || !$('#q6').val()
+        || !$('#q7').val() || !$('#q8').val() || !$('#q9').val() || !$('#q10').val()
+        ) { 
+            // Change to modal from alert later
+            alert('Name and Photo fields required.');
         } else {
-
-        
-
         // Grab all form values
         var newFriend = {
             name:$('#friendName').val(),
@@ -211,12 +228,10 @@
         $.post('/api/friends', newFriend, function(data) {
             console.log(data);
             if (data) {
-                // alert('Form submitted successfully!');              // This may need to change to display the correct match here.
+                // Display the best calculated match
             }
-        })
-
-
-
+        }); // End of Post function
+        clearForms();
         }   // End of Else Statement
     }); // End of Submit Click Event
 </script>
