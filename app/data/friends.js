@@ -65,7 +65,7 @@ var friendsArray = [
     },
     {
         'name': 'Sansa Stark',
-        'photo': 'hhttps://fsmedia.imgix.net/d7/2b/c5/a1/7817/40bf/bb26/473504b86ea4/sansa-stark-game-of-thrones.jpeg?crop=edges&fit=crop&auto=format%2Ccompress&dpr=2&h=325&w=650',
+        'photo': 'https://fsmedia.imgix.net/d7/2b/c5/a1/7817/40bf/bb26/473504b86ea4/sansa-stark-game-of-thrones.jpeg?crop=edges&fit=crop&auto=format%2Ccompress&dpr=2&h=325&w=650',
         'scores': [
             '2',
             '4',
