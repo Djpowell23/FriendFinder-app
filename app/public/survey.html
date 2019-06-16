@@ -17,7 +17,9 @@
 
 </head>
 
-<body onload = 'clearForms()'>;
+<!-- <body onload='clearForms()'>; -->
+
+<body>
     <div class='container'>
         <h2><strong>Survey</strong></h2>
         <hr>
@@ -174,64 +176,100 @@
     </div>
 
 </body>
+
 </html>
 
 <script type='text/javascript'>
+
+    function runFriendQuery() {
+        $.ajax({
+            url: '/api/friends',
+            method: 'GET'
+        }).then(function (friendsData) {
+            console.log('friEnds data:', friendsData);
+            console.log('--------------------------------');
+
+            // Loop through and display each of the results
+            for (var i = 0; i < friendsData.length; i++) {
+
+            }
+        });
+    }
+
+    runFriendQuery();
+
+    $(document).ready(function () {
+        var friendsArray;
+        // Grab friends array from api
+        $.get('/api/friends')
+            .done(function (data) {
+                // Stores data to variable
+                friendsArray = data;
+                // Return array to use
+                return friendsArray;
+            });
+
+        $('#submit').on('click', function (event) {
+            // Prevent Page Refresh
+            event.preventDefault();
+
+            // Make Sure Name and Photo Fields are filled
+            if ($('#friendName').val() === '' || $('#photoURL').val() === '' || !$('#q1').val() || !$('#q2').val()
+                || !$('#q3').val() || !$('#q4').val() || !$('#q5').val() || !$('#q6').val()
+                || !$('#q7').val() || !$('#q8').val() || !$('#q9').val() || !$('#q10').val()
+            ) {
+                // Change to modal from alert later
+                alert('Name and Photo fields required.');
+            } else {
+                // Grab all form values
+                var newFriend = {
+                    name: $('#friendName').val(),
+                    photo: $('#photoURL').val(),
+                    scores: [
+                        $('#q1').val(),
+                        $('#q2').val(),
+                        $('#q3').val(),
+                        $('#q4').val(),
+                        $('#q5').val(),
+                        $('#q6').val(),
+                        $('#q7').val(),
+                        $('#q8').val(),
+                        $('#q9').val(),
+                        $('#q10').val(),
+                    ]
+                }; // End of object
+                // console.log(newFriend);
+
+                // Post Request sending new friend to api/friends
+                $.post('/api/friends', newFriend).done(function (data, res) {
+                    console.log('data:', data); // true
+                    console.log('res:', res); // success
+                    console.log('new friend:', newFriend); // newFriend just added
+                    console.log('friendsArray:', friendsArray); // array of existing friends
+                    if (data) {
+                        // Display the best calculated match
+                    }
+
+                    // Matchmaking Logic
+                }); // End of Post function
+                clearForms();
+            }   // End of Else Statement
+        }); // End of Submit Click Event
+    }); // End of Ready Function
+
     // Clear forms on page load
     function clearForms() {
         $('#friendName').val('');
         $('#photoURL').val('');
         $('#q1').val(''),
-        $('#q2').val(''),
-        $('#q3').val(''),
-        $('#q4').val(''),
-        $('#q5').val(''),
-        $('#q6').val(''),
-        $('#q7').val(''),
-        $('#q8').val(''),
-        $('#q9').val(''),
-        $('#q10').val('')
+            $('#q2').val(''),
+            $('#q3').val(''),
+            $('#q4').val(''),
+            $('#q5').val(''),
+            $('#q6').val(''),
+            $('#q7').val(''),
+            $('#q8').val(''),
+            $('#q9').val(''),
+            $('#q10').val('')
     };
-
-    $('#submit').on('click', function(event) {
-        // Prevent Page Refresh
-        event.preventDefault();
-
-        // Make Sure Name and Photo Fields are filled
-        if ($('#friendName').val() === '' || $('#photoURL').val() === '' || !$('#q1').val() || !$('#q2').val()
-        || !$('#q3').val() || !$('#q4').val() || !$('#q5').val() || !$('#q6').val()
-        || !$('#q7').val() || !$('#q8').val() || !$('#q9').val() || !$('#q10').val()
-        ) { 
-            // Change to modal from alert later
-            alert('Name and Photo fields required.');
-        } else {
-        // Grab all form values
-        var newFriend = {
-            name:$('#friendName').val(),
-            photo:$('#photoURL').val(),
-            scores: [
-                $('#q1').val(),
-                $('#q2').val(),
-                $('#q3').val(),
-                $('#q4').val(),
-                $('#q5').val(),
-                $('#q6').val(),
-                $('#q7').val(),
-                $('#q8').val(),
-                $('#q9').val(),
-                $('#q10').val(),
-            ]
-        }; // End of object
-        console.log(newFriend);
-
-        // Post Request sending new friend to api/friends
-        $.post('/api/friends', newFriend, function(data) {
-            console.log(data);
-            if (data) {
-                // Display the best calculated match
-            }
-        }); // End of Post function
-        clearForms();
-        }   // End of Else Statement
-    }); // End of Submit Click Event
 </script>
