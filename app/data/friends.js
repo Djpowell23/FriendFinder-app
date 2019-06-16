@@ -46,6 +46,54 @@ var friendsArray = [
             '5',
             '2'
         ]
+    },
+    {
+        'name': 'Lord Varys',
+        'photo': 'http://secureservercdn.net/50.62.88.95/g42.203.myftpupload.com/wp-content/uploads/VarysSmile-1070x518.jpg',
+        'scores': [
+            '5',
+            '5',
+            '5',
+            '4',
+            '5',
+            '1',
+            '5',
+            '4',
+            '5',
+            '1'
+        ]
+    },
+    {
+        'name': 'Sansa Stark',
+        'photo': 'hhttps://fsmedia.imgix.net/d7/2b/c5/a1/7817/40bf/bb26/473504b86ea4/sansa-stark-game-of-thrones.jpeg?crop=edges&fit=crop&auto=format%2Ccompress&dpr=2&h=325&w=650',
+        'scores': [
+            '2',
+            '4',
+            '2',
+            '4',
+            '1',
+            '4',
+            '2',
+            '1',
+            '2',
+            '2'
+        ]
+    },
+    {
+        'name': 'Jaime Lannister',
+        'photo': 'https://pixel.nymag.com/imgs/daily/vulture/2019/04/16/got-jaime-facial-hair/season-1.w700.h467.jpg',
+        'scores': [
+            '3',
+            '5',
+            '5',
+            '4',
+            '2',
+            '4',
+            '3',
+            '3',
+            '1',
+            '3'
+        ]
     }
 ];
 
