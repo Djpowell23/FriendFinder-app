@@ -17,9 +17,8 @@
 
 </head>
 
-<!-- <body onload='clearForms()'>; -->
+<body onload='clearForms()'>;
 
-<body>
     <div class='container'>
         <h2><strong>Survey</strong></h2>
         <hr>
@@ -175,28 +174,32 @@
         </footer>
     </div>
 
+    <!-- Modal -->
+    <!-- Modal -->
+	<div id="modal" class="modal fade">
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h2 class="modal-title"><strong>Best Match</strong></h2>
+                </div>
+                <div class="modal-body">
+                  <h2 id="matchName"></h2>
+                  <img id="matchImg" src="file:///Users/lisavanorden/Documents/RCB_files/week13_files/wk13_hw/friendfinder/assets/images/floya_avatar_pic.jpg" alt="">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+      
+            </div>
+          </div>
+
 </body>
 
 </html>
 
 <script type='text/javascript'>
-
-    function runFriendQuery() {
-        $.ajax({
-            url: '/api/friends',
-            method: 'GET'
-        }).then(function (friendsData) {
-            console.log('friEnds data:', friendsData);
-            console.log('--------------------------------');
-
-            // Loop through and display each of the results
-            for (var i = 0; i < friendsData.length; i++) {
-
-            }
-        });
-    }
-
-    runFriendQuery();
 
     $(document).ready(function () {
         var friendsArray;
@@ -218,7 +221,6 @@
                 || !$('#q3').val() || !$('#q4').val() || !$('#q5').val() || !$('#q6').val()
                 || !$('#q7').val() || !$('#q8').val() || !$('#q9').val() || !$('#q10').val()
             ) {
-                // Change to modal from alert later
                 alert('Name and Photo fields required.');
             } else {
                 // Grab all form values
@@ -247,7 +249,9 @@
                     console.log('new friend:', newFriend); // newFriend just added
                     console.log('friendsArray:', friendsArray); // array of existing friends
                     if (data) {
-                        // Display the best calculated match
+                        $('#matchName').text(data.name);
+                        $('#matchImg').attr('src', data.photo);
+                        $('#modal').modal('toggle');
                     }
 
                     // Matchmaking Logic
@@ -272,4 +276,21 @@
             $('#q9').val(''),
             $('#q10').val('')
     };
+
+    function runFriendQuery() {
+        $.ajax({
+            url: '/api/friends',
+            method: 'GET'
+        }).then(function (friendsData) {
+            console.log('friEnds data:', friendsData);
+            console.log('--------------------------------');
+
+            // Loop through and display each of the results
+            for (var i = 0; i < friendsData.length; i++) {
+
+            }
+        });
+    }
+
+    runFriendQuery();
 </script>
